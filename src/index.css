@@ -1,0 +1,154 @@
+@import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&family=Press+Start+2P&display=swap");
+@import "tailwindcss";
+ 
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #020617;
+  user-select: none;
+  -webkit-user-select: none;
+}
+ 
+/* -------------------------------------------------------------------------
+ * iOS look-and-feel (Human Interface Guidelines) for phone UI in the game:
+ * text messages, juror summons alerts and notification banners.
+ * SF Pro is used automatically on Apple devices via the system font stack.
+ * ---------------------------------------------------------------------- */
+.ios {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+    "Helvetica Neue", "Segoe UI", Roboto, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.011em;
+  text-align: left;
+}
+ 
+/* Frosted glass with a subtle lift, like a native iPhone notification. */
+.ios-glass {
+  background: rgba(246, 246, 248, 0.72);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  backdrop-filter: blur(25px) saturate(180%);
+  border: 0.5px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.28), 0 2px 6px rgba(0, 0, 0, 0.14);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .ios-glass { background: rgba(244, 244, 247, 0.97); }
+}
+ 
+.ios-banner { border-radius: 22px; color: #000; }
+.ios-banner-in { animation: ios-banner-in 0.5s cubic-bezier(0.22, 1.2, 0.36, 1) both; }
+@keyframes ios-banner-in {
+  from { opacity: 0; transform: translateY(-28px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) { .ios-banner-in { animation: none; } }
+ 
+.ios-secondary { color: rgba(60, 60, 67, 0.6); }
+ 
+/* Message thread: white surface so bubble tails can cut out cleanly. */
+.ios-thread { --ios-surface: #ffffff; background: var(--ios-surface); }
+ 
+.ios-bubble {
+  position: relative;
+  max-width: 78%;
+  padding: 7px 12px 8px;
+  border-radius: 18px;
+  font-size: 15px;
+  line-height: 20px;
+  overflow-wrap: anywhere;
+}
+.ios-bubble.received { background: #e9e9eb; color: #000; align-self: flex-start; }
+.ios-bubble.sent     { background: #007aff; color: #fff; align-self: flex-end; }
+ 
+/* Bubble tails (the small curl on the last bubble in a group). */
+.ios-bubble.tail::before,
+.ios-bubble.tail::after { content: ""; position: absolute; bottom: 0; height: 18px; }
+.ios-bubble.received.tail::before {
+  left: -7px; width: 20px; background: #e9e9eb; border-bottom-right-radius: 16px 14px;
+}
+.ios-bubble.received.tail::after {
+  left: -26px; width: 26px; background: var(--ios-surface, #fff); border-bottom-right-radius: 10px;
+}
+.ios-bubble.sent.tail::before {
+  right: -7px; width: 20px; background: #007aff; border-bottom-left-radius: 16px 14px;
+}
+.ios-bubble.sent.tail::after {
+  right: -26px; width: 26px; background: var(--ios-surface, #fff); border-bottom-left-radius: 10px;
+}
+ 
+.ios-action {
+  font-size: 15px; font-weight: 600; padding: 10px 12px; border-radius: 14px;
+  background: rgba(120, 120, 128, 0.16); transition: background 0.15s, transform 0.1s;
+  cursor: pointer; border: 0;
+}
+.ios-action:hover  { background: rgba(120, 120, 128, 0.26); }
+.ios-action:active { transform: scale(0.97); }
+ 
+/* -------------------------------------------------------------------------
+ * Pixel-art scene kit (title, wake up, jury, arrival home, crash)
+ * ---------------------------------------------------------------------- */
+.px-font  { font-family: "Pixelify Sans", "Courier New", monospace; }
+.px-title { font-family: "Press Start 2P", "Courier New", monospace; letter-spacing: 0; }
+.px-art   { image-rendering: pixelated; image-rendering: crisp-edges; }
+ 
+/* Full-bleed pixel backdrop; set background-image inline. */
+.px-scene {
+  background-size: cover; background-position: center; background-repeat: no-repeat;
+  image-rendering: pixelated;
+}
+.px-scene-dim::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, rgba(10,6,24,0.78) 0%, rgba(10,6,24,0.25) 45%, rgba(10,6,24,0.1) 100%);
+}
+.px-scanlines::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 60;
+  background: repeating-linear-gradient(to bottom, rgba(0,0,0,0.10) 0, rgba(0,0,0,0.10) 1px, transparent 1px, transparent 3px);
+}
+ 
+/* Square, stepped-shadow panel. Everything inside loses its rounded corners. */
+.px-ui { font-family: "Pixelify Sans", "Courier New", monospace; }
+.px-ui, .px-ui * { border-radius: 0 !important; }
+.px-panel {
+  background: rgba(23, 18, 43, 0.93);
+  border: 4px solid #f4e9c8;
+  box-shadow: 0 0 0 4px #17122b, 8px 8px 0 4px rgba(0, 0, 0, 0.55);
+  color: #f4e9c8;
+}
+.px-tag {
+  display: inline-block; background: #ffb347; color: #17122b; border: 3px solid #17122b;
+  font-family: "Press Start 2P", monospace; font-size: 10px; padding: 6px 10px; text-transform: uppercase;
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.5);
+}
+.px-btn {
+  --px-bg: #ffb347;
+  background: var(--px-bg); color: #17122b; border: 4px solid #17122b; cursor: pointer;
+  font-family: "Press Start 2P", monospace; font-size: 12px; line-height: 1.4; text-transform: uppercase;
+  padding: 14px 18px; text-align: left;
+  box-shadow: inset 4px 4px 0 rgba(255,255,255,0.4), inset -4px -4px 0 rgba(0,0,0,0.28), 4px 4px 0 rgba(0,0,0,0.5);
+  transition: transform 0.05s;
+}
+.px-btn:hover  { filter: brightness(1.12); }
+.px-btn:active { transform: translate(3px, 3px); box-shadow: inset 4px 4px 0 rgba(0,0,0,0.25), 1px 1px 0 rgba(0,0,0,0.5); }
+.px-btn-sky  { --px-bg: #6ec6ff; }
+.px-btn-red  { --px-bg: #ff6b6b; }
+.px-btn-grn  { --px-bg: #7be08a; }
+ 
+.px-blink { animation: px-blink 0.9s steps(2, jump-none) infinite; }
+@keyframes px-blink { 0% { opacity: 1; } 100% { opacity: 0; } }
+ 
+.px-shake { animation: px-shake 0.6s steps(2, jump-none) 3; }
+@keyframes px-shake {
+  0% { transform: translate(0,0); } 25% { transform: translate(-8px,4px); }
+  50% { transform: translate(6px,-6px); } 75% { transform: translate(-4px,-4px); } 100% { transform: translate(0,0); }
+}
+.px-flash { animation: px-flash 0.9s steps(6, jump-none) 1 forwards; }
+@keyframes px-flash { 0% { opacity: 1; } 100% { opacity: 0; } }
+.px-static {
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 4px),
+    repeating-linear-gradient(90deg, rgba(255,60,60,0.06) 0 4px, transparent 4px 8px);
+}
+@media (prefers-reduced-motion: reduce) { .px-shake, .px-blink, .px-flash { animation: none; } }
+ 

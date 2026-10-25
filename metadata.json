@@ -1,0 +1,6 @@
+{
+  "name": "Last Exit : Duval",
+  "description": "A cinematic 3D driving simulator and civic responsibility game. Make critical driving decisions on your way to jury duty and back home: 'Don't drive like you have another life.'",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
