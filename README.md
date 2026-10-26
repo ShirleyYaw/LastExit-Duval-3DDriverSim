@@ -97,22 +97,3 @@ The application was built and validated with the following test procedures:
 5. **Audio Context Restrictions**: Audio initialization strictly deferred to user click/interaction, conforming to browser autoplay security policies.
 6. **Defensive-Driving Logic**: The head-look controller, the lane-change / scan / following-distance monitor and the scripted traffic behaviors are plain TypeScript modules (`src/game/lookController.ts`, `defensiveDriving.ts`, `trafficBehavior.ts`) with no 3D dependency, so they can be unit tested in Node.
 
----
-
-## 5. 3-Minute Demonstration Video Guide
-
-To record a walkthrough video demonstration:
-1. **Minute 0:00 – 0:45 (The Problem & The Hook)**:
-   - Introduce the dual theme: jury duty civic service and driver safety.
-   - Show the Chapter 1 opening sequence (late alarm, summons alert, grabbing keys).
-2. **Minute 0:45 – 1:45 (First-Person 3D Driving Simulator)**:
-   - Highlight the 3D cockpit: working speedometer, tachometer, GPS navigation, and rotating steering wheel.
-   - Show traffic navigation, receiving the urgent text message, and choosing the defensive option (leaving the phone alone).
-   - Hold `2` to check the rearview mirror, then signal, check the left mirror (`1`), shoulder-check (`Z`) and change lanes. Point out that the car beside you is invisible in the mirrors but visible over your shoulder.
-3. **Minute 1:45 – 2:30 (Courthouse & Civic Orientation)**:
-   - Reach the Duval County Courthouse.
-   - Walk into Juror Assembly Room 2B, power off your phone, and answer the judge's civic responsibility question.
-4. **Minute 2:30 – 3:00 (Drive Home, Rain Storm & Mom's Ending)**:
-   - Drive home during the afternoon storm with procedural rain particles.
-   - Arrive safely in the driveway to hear Mom's personalized evaluation.
-   - Conclude with the core takeaway: *“Don't drive like you have another life.”*
